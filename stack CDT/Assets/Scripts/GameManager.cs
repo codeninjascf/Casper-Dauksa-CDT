@@ -10,39 +10,29 @@ public class GameManager : MonoBehaviour
 
     private bool _gameOver;
 
-    private void Start;
+    private void Start()
     {
         spawner.Spawn();
     }
 
-    private void Start;
+    private void Update()
     {
         if (Input.GetButtonDown("Fire1") && !_gameOver)
         {
-            BlockMovement.CurrentBlock.Stop;
+            BlockMovement.CurrentBlock.Stop();
             if (BlockMovement.GameOver)
             {
                 _gameOver = true;
             }
+            else
+            {
+                spawner.Spawn();
+                view.Height = spawner.GetNewHeight();
+                uiManager.Score++;
+            }
 
         }
-        else
-        {
-            spawner.spawn();
-            view.Hieght = spawner.GetNewHeight();
-            uiManager.Score++;
-        }
-    }
-}
-}
-   void Start()
-    {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
