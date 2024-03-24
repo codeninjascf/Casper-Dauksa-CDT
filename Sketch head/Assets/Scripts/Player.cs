@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static void Turn(Rigidbody2D rb, float movement)
+    public static void Turn(GameObject rb, float movement)
     {
-        SpriteRenderer spriteRenderer = rb.gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = rb.GetComponent<SpriteRenderer>();
 
         spriteRenderer.flipX = movement switch
         {

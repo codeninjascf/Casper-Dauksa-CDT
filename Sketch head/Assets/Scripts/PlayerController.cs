@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 10f
+    public float moveSpeed = 10f;
     public float jumpForce = 15f;
 
     private Rigidbody2D _rigidbody;
 
-    void start()
+    void Start()
     {
-        _Rigidbody2D2D _rigidbody;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
         float movement = moveSpeed * Input.GetAxis("Horizontal");
 
-        Player.Turn(_rigidbody, movement);
+        Player.Turn(gameObject, movement);
 
         _rigidbody.position += movement * Time.deltaTime * Vector2.right;
     }
@@ -26,20 +26,8 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D()
     {
         if (_rigidbody.velocity.y <= 0)
-    }
-    _rigidbody.AddForce(Vector2.up* jumpForce, ForceMode2D.Impulse);
+        {
+            _rigidbody.AddForce(Vector2.up* jumpForce, ForceMode2D.Impulse);
         }
-}
-}
-// Start is called before the first frame update
-void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
