@@ -6,22 +6,37 @@ public class Spawner : MonoBehaviour
 {
     public float objectSpeed = 8f;
 
-    private List<gameObject> _activeObjects;
+    private List<GameObject> _activeObjects;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _activeObjects = new List<GameObject>();
+        StartCoroutine(Spawn());
+        StartCoroutine(NameOfMethod());
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 movement = objectSpeed * Time.DeltaTime * Vector3.left;
+        Vector3 movement = objectSpeed * Time.deltaTime * Vector3.left;
         foreach (GameObject activeObject in _activeObjects)
         {
-            activeObject.transform.position += meovement;
+            activeObject.transform.position += movement;
         }
-        GameManager.UpdateScore(movement;)
+        GameManager.UpdateScore(movement);
     }
-    
+
+    IEnumerator Spawn()
+    {
+        GameManager.UpdateList(_activeObjects);
+
+        GameObject challengeObject = Instantiate(GameManager.GetChallengeObject());
+        challengeObject.transform.position = new Vector3(GameManager.ScreenBounds.x, 0);
+        _activeObjects.Add(challengeObject);
+        challengeObject script = challengeObject.GetComponent<challengeTime);
+
+
+        yield return new WaitForSeconds(script.challengeTime);
+        StartCoroutine(Spawn());
+    }
 }
