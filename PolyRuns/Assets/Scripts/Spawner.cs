@@ -33,7 +33,7 @@ public class Spawner : MonoBehaviour
         GameObject challengeObject = Instantiate(GameManager.GetChallengeObject());
         challengeObject.transform.position = new Vector3(GameManager.ScreenBounds.x, 0);
         _activeObjects.Add(challengeObject);
-        challengeObject script = challengeObject.GetComponent<challengeTime);
+        challengeObject script = challengeObject.GetComponent<challengeTime>();
 
 
         yield return new WaitForSeconds(script.challengeTime);
