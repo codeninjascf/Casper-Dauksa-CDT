@@ -12,7 +12,6 @@ public class Spawner : MonoBehaviour
     {
         _activeObjects = new List<GameObject>();
         StartCoroutine(Spawn());
-        StartCoroutine(NameOfMethod());
     }
 
     // Update is called once per frame
@@ -33,7 +32,7 @@ public class Spawner : MonoBehaviour
         GameObject challengeObject = Instantiate(GameManager.GetChallengeObject());
         challengeObject.transform.position = new Vector3(GameManager.ScreenBounds.x, 0);
         _activeObjects.Add(challengeObject);
-        challengeObject script = challengeObject.GetComponent<challengeTime>();
+        ChallengeObject script = challengeObject.GetComponent<ChallengeObject>();
 
 
         yield return new WaitForSeconds(script.challengeTime);
