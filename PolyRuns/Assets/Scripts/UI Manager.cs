@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
-    void Start()
+   
         public GameObject mainMenu;
 
     public GameObject gameOverMenu;
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     {
         scoreText.text = GameManager.Score.ToString();
 
-        if (!_gameOver && FameManager.GameOver)
+        if (!_gameOver && GameManager.GameOver)
         {
             _gameOver = true;
 
