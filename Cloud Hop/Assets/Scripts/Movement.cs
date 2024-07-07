@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public float jumpForce = 15f;
-    
+
     private Rigidbody2D _rigidbody;
     private bool _canJump;
 
@@ -17,10 +17,10 @@ public class Movement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    
+
     void Update()
     {
-        if(_rigidbody.velocity.y > -.01 && _rigidbody.velocity.y < .01)
+        if (_rigidbody.velocity.y > -.01 && _rigidbody.velocity.y < .01)
         {
             _canJump = true;
         }
@@ -28,9 +28,15 @@ public class Movement : MonoBehaviour
         {
             _canJump = false;
         }
-        if(_canJump && Input.GetButtonDown("Jump"))
+        if (_canJump && Input.GetButtonDown("Jump"))
         {
             _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+    }
+    void FixedUpdate()
+    {
+        float movement = moveSpeed * Input.GetAxis("Horizontal");
+
+        transform.position += movement * Time.deltaTime * Vector3.right;
     }
 }
