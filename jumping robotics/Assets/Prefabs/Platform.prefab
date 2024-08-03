@@ -1623,6 +1623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0481627df0c3b144ad1e3a5811ea5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 467374}
+  enemies:
+  - {fileID: 108138}
+  - {fileID: 154030}
+  - {fileID: 161752}
 --- !u!1 &189850
 GameObject:
   m_ObjectHideFlags: 0
