@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9544642}
   - component: {fileID: 5080782}
   - component: {fileID: 6117656}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SlowEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 411614}
   - component: {fileID: 21234690}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471104}
   - component: {fileID: 21274086}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446834}
   - component: {fileID: 21208962}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 498856}
   - component: {fileID: 21277528}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 9537786}
   - component: {fileID: 5049986}
   - component: {fileID: 6163266}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NormalEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 9585536}
   - component: {fileID: 5064180}
   - component: {fileID: 6165952}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FastEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -931,7 +931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 444998}
   - component: {fileID: 21229338}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1014,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 444472}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1054,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 417226}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1088,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 467374}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 487802}
   - component: {fileID: 21291420}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1204,7 +1204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 424796}
   - component: {fileID: 21203938}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1288,7 +1288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 422492}
   - component: {fileID: 21267842}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1373,10 +1373,10 @@ GameObject:
   - component: {fileID: 457430}
   - component: {fileID: 2178470476908858305}
   - component: {fileID: 6150574}
-  - component: {fileID: 6186070}
   - component: {fileID: 8237774}
   - component: {fileID: -30497973423208536}
-  m_Layer: 9
+  - component: {fileID: -6143377056913355920}
+  m_Layer: 3
   m_Name: Platform
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -1455,7 +1455,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -1469,51 +1469,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 6.252281, y: 0.5}
-  m_EdgeRadius: 0
---- !u!61 &6186070
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186010}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.24}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 6, y: 0.05}
   m_EdgeRadius: 0
 --- !u!82 &8237774
 AudioSource:
@@ -1628,6 +1583,25 @@ MonoBehaviour:
   - {fileID: 108138}
   - {fileID: 154030}
   - {fileID: 161752}
+--- !u!251 &-6143377056913355920
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186010}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &189850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,7 +1612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 494604}
   - component: {fileID: 21210182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sprite_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

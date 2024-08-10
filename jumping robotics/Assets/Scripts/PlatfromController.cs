@@ -35,7 +35,7 @@ public class PlatfromController : MonoBehaviour
         _player = FindObjectOfType<PlayerController>().transform;
     }
 
-    public void IninialisePlatform()
+    public void InitialisePlatform()
     {
         _activated = false;
         _platformSettings.SetRed();
