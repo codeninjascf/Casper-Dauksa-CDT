@@ -8,41 +8,61 @@ public class Pushing : MonoBehaviour
     private bool _pushing;
     private Animator _animator;
 
+    public AudioClip footsteps;
+    public AudioClip boxSliding;
+
+    private AudioSource _audioSource;
+
 
     void Start()
     {
-        _animator - GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
-}
     void OnControllerColliderHit(ControllerColliderHit hit)
-{
-    Rigidbody body = hit.collider.attachedRigidbody;
-    if (body == null || body.isKinematic || hit.moveDirection.y < -0.3)
     {
-        return;
-    }
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic || hit.moveDirection.y < -0.3)
+        {
+            return;
+        }
 
         _pushing = true;
 
         Vector3 pushDirection;
 
-        if (Mathf.Abs(ColliderHit.moveDirection.z))
+        if (Mathf.Abs(hit.moveDirection.x) > (hit.moveDirection.z))
         {
-            pushDirection = new Vector3(hit.moveDirection.x, 0, 0,);
+            pushDirection = new Vector3(hit.moveDirection.x, 0, 0);
         }
         else
         {
-            pushDirection = new Vector3(0, 0, hit.moveDirection.z);
-    }
-}
-        Body.velocity = pushDirecting * pushPower;
+        pushDirection = new Vector3(0, 0, hit.moveDirection.z);
+        
 
-        _animator.SetBool("isPushing", true);
+            body.velocity = pushDirection * pushPower;
+
+            _animator.SetBool("isPushing", true);
+            }
+            body.velocity = pushDirection * pushPower;
+
+            _animator.SetBool("isPushing", true);
+
+            CancelInvoke("StopPushing");
+
+            _audioSource.clip = boxSliding;
+        }
+
+    void StopPushing()
+    {
+        _animator.SetBool("isPushing", false);
+        _pushing = false;
+
+        _audioSource.clip = footsteps;
     }
 }
