@@ -7,6 +7,9 @@ public class DoorSwitch : MonoBehaviour
     public GameObject enabledObject;
     public GameObject disabledObject;
 
+    public AudioClip enabledSound;
+    public AudioClip disabledSound;
+
     private AudioSource _audioSource;
 
     void Start()
@@ -37,10 +40,10 @@ public class DoorSwitch : MonoBehaviour
         enabledObject.SetActive(false);
         disabledObject.SetActive(true);
 
-        SwitchEnabled = false;
+        SwitchEnabled = true;
 
-         _audioSource.clip = disabledSound;
-        _audioSource.play();
+        _audioSource.clip = disabledSound;
+        _audioSource.Play();
     }
 
         void OnTriggerEnter(Collider other)
@@ -51,7 +54,7 @@ public class DoorSwitch : MonoBehaviour
             SwitchEnabled = true;
 
             _audioSource.clip = enabledSound;
-            _audioSource.play();
+            _audioSource.Play();
         }
 
     void OnTriggerStay(Collider other)
