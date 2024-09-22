@@ -12,6 +12,7 @@ public class DoorTrigger : MonoBehaviour
     private AudioSource _audioSource;
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
     }
 
