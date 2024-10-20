@@ -22,7 +22,7 @@ public class Pushing : MonoBehaviour
 
     void Update()
     {
-        
+        StopPushing();
     }
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -36,27 +36,28 @@ public class Pushing : MonoBehaviour
 
         Vector3 pushDirection;
 
-        if (Mathf.Abs(hit.moveDirection.x) > (hit.moveDirection.z))
+        if (Mathf.Abs(hit.moveDirection.x) > Mathf.Abs(hit.moveDirection.z))
         {
             pushDirection = new Vector3(hit.moveDirection.x, 0, 0);
+            body.velocity = pushDirection * pushPower;
+
+            _animator.SetBool("isPushing", true);
         }
         else
         {
-        pushDirection = new Vector3(0, 0, hit.moveDirection.z);
+            pushDirection = new Vector3(0, 0, hit.moveDirection.z);
+            body.velocity = pushDirection * pushPower;
+
+            _animator.SetBool("isPushing", true);
+        }
+
+        
         
 
-            body.velocity = pushDirection * pushPower;
+        CancelInvoke("StopPushing");
 
-            _animator.SetBool("isPushing", true);
-            }
-            body.velocity = pushDirection * pushPower;
-
-            _animator.SetBool("isPushing", true);
-
-            CancelInvoke("StopPushing");
-
-            _audioSource.clip = boxSliding;
-        }
+        _audioSource.clip = boxSliding;
+    }
 
     void StopPushing()
     {
