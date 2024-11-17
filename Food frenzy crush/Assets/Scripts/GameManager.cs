@@ -38,12 +38,12 @@ public class GameManager : MonoBehaviour
         }
         else if (level.type == LevelType.Time)
         {
-            double timeRemaining = Math.Max(level.TimeRemaining, 0);
+            double timeRemaining = Math.Max(level.TimeRemaning, 0);
             TimeSpan time = TimeSpan.FromSeconds(timeRemaining);
             uiManager.criteriaNumber.text = time.ToString(@"mm\:ss");
         }
         
-        int starsAchieved = level.StarsAchieved(gridManager.Score); 
+        int starsAchieved = level.StarAchieved(gridManager.Score); 
 
         uiManager.UpdateScores(gridManager.Score);
         uiManager.UpdateStars(starsAchieved);
@@ -68,9 +68,9 @@ public class GameManager : MonoBehaviour
 
             level.UpdateHighScore(gridManager.Score);
                 level.UpdateStarsAchieved(gridManager.Score);
-            }
         }
     }
+
 
     void LateUpdate()
     {
