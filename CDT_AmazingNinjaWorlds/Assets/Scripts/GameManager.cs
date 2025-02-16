@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public float respawnDelay = 1.5f;
     public PlayerController player;
     public CameraFollow cam;
-    public Vector3 spawnPosition;
+    public Transform[] checkpoints;
+
+    private int _currentCheckpoint;
     void Start()
     {
-
+        _currentCheckpoint = 0;
     }
 
     // Update is called once per frame
@@ -38,5 +41,25 @@ public class GameManager : MonoBehaviour
         player.transform.position = spawnPosition;
 
         cam.ResetView();
+    }
+
+    public void SetCheckpoint(Transform checkpoint)
+    {
+        int checkpointNumber = Array.IndexOf(checkpoints, checkpoint);
+        {
+            if (checkpointNumber > _currentCheckpoint)
+            {
+                _currentCheckpoint = checkpointNumber;
+            }
+        }
+    }
+
+    IEnumerator ResetPlayer()
+    {
+        yield return new WaitForSeconds(respawnDelay);
+
+        Vector3 spawnPosition = checkpoints[_currentCheckpoint].position;
+
+        Player.Enable();
     }
 }
