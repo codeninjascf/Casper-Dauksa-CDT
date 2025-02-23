@@ -9,11 +9,15 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     public CameraFollow cam;
     public Transform[] checkpoints;
-
+    public Transform[] collectibles;
+   
     private int _currentCheckpoint;
+    private bool[] _collectiblesCollected;
+
     void Start()
     {
         _currentCheckpoint = 0;
+        _collectiblesCollected = new bool[3];
     }
 
     // Update is called once per frame
@@ -29,18 +33,6 @@ public class GameManager : MonoBehaviour
 
         player.gameObject.SetActive(false);
         StartCoroutine(ResetPlayer());
-    }
-
-    IEnumerator ResetPlayer()
-    {
-        yield return new WaitForSeconds(respawnDelay);
-
-        player.Enable();
-        player.gameObject.SetActive(true);
-        player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        player.transform.position = spawnPosition;
-
-        cam.ResetView();
     }
 
     public void SetCheckpoint(Transform checkpoint)
@@ -59,7 +51,17 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(respawnDelay);
 
         Vector3 spawnPosition = checkpoints[_currentCheckpoint].position;
+        player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        player.Enable();
+        player.gameObject.SetActive(true);
+        cam.ResetView();
+        player.transform.position = spawnPosition;
+    }
 
-        Player.Enable();
+    public void GotCollectible(Transform collectible)
+    {
+        int collectibleNumber = Array.IndexOf(collectibles, collectible);
+
+        _collectiblesCollected[collectibleNumber] = true;
     }
 }
