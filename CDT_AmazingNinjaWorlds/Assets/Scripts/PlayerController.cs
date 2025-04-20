@@ -8,18 +8,39 @@ public class PlayerController : MonoBehaviour
 
     public float groundDistanceThreshold = 0.55f;
 
+
+    public float spriteHeight = 1.78f;
+
     public LayerMask whatIsGround;
 
+    public bool _gravityFlipped;
     private bool _isGrounded;
     private bool _enabled;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+
+    public bool GravityFlipped
+    {
+        get => _gravityFlipped;
+        set
+        {
+            _gravityFlipped = value;
+
+            int multiplier = value ? -1 : 1;
+            _rigidbody.gravityScale = multiplier * Mathf.Abs(_rigidbody.gravityScale);
+            jumpForce = multiplier * Mathf.Abs(jumpForce);
+
+            Transform body = transform.GetChild(0);
+            body.localScale = new Vector3(1, multiplier, 1);
+        }
+    }
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
+        GravityFlipped = false;
         _enabled = true;
     }
 
@@ -96,10 +117,20 @@ public class PlayerController : MonoBehaviour
             gameManager.GotCollectible(other.transform);
             other.gameObject.SetActive(false);
         }
-    
+
         else if (other.CompareTag("Goal"))
         {
             gameManager.ReachedGoal();
+        }
+
+        else if (other.CompareTag("FlipGravity") && !GravityFlipped)
+        {
+            GravityFlipped = true;
+        }
+
+        else if (other.CompareTag("RevertGravity") && _gravityFlipped)
+        {
+            GravityFlipped = false;
         }
     }
 }
