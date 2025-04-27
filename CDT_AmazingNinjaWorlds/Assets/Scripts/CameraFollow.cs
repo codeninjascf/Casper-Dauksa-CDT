@@ -13,7 +13,8 @@ public class CameraFollow : MonoBehaviour
     public Vector3 cameraOffset;
 
     public float deathHeight = -2;
-
+    public bool heightLimitActive;
+    public float heightLimit = 16;
     private bool _following;
     private float _cameraHeight;
 
@@ -26,11 +27,21 @@ public class CameraFollow : MonoBehaviour
         ResetView();
     }
 
+
+
     void Update()
     {
-        _following = target.position.y > deathHeight;
+        _following = target.position.y > deathHeight &&
+        (!heightLimitActive || target.position.y < heightLimit);
+
         if (target.gameObject.activeSelf && target.position.y <=
             deathHeight - _cameraHeight)
+        {
+            gameManager.KillPlayer();
+        }
+
+        if (target.gameObject.activeSelf && target.position.y >=
+           heightLimit + _cameraHeight && heightLimitActive)
         {
             gameManager.KillPlayer();
         }

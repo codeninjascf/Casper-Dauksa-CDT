@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 
     public float groundDistanceThreshold = 0.55f;
 
-
     public float spriteHeight = 1.78f;
 
     public LayerMask whatIsGround;
@@ -18,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool _enabled;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+
 
     public bool GravityFlipped
     {
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -47,8 +48,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (!_enabled) return;
-        _isGrounded = Physics2D.Raycast(transform.position, Vector2.down,
-            groundDistanceThreshold, whatIsGround);
+        _isGrounded = !GravityFlipped ?
+            Physics2D.Raycast(transform.position, Vector2.down,
+            groundDistanceThreshold, whatIsGround)
+            : Physics2D.Raycast(transform.position, Vector2.up,
+            groundDistanceThreshold + spriteHeight, whatIsGround);
+
 
         if (_isGrounded && Input.GetButtonDown("Jump"))
         {
@@ -126,9 +131,10 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("FlipGravity") && !GravityFlipped)
         {
             GravityFlipped = true;
+            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
 
-        else if (other.CompareTag("RevertGravity") && _gravityFlipped)
+        else if (other.CompareTag("RevertGravity") && GravityFlipped)
         {
             GravityFlipped = false;
         }
