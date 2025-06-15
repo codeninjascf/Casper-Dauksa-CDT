@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float spriteHeight = 1.78f;
 
     public LayerMask whatIsGround;
+    public Transform throwPosition;
+    public GameObject shuriken;
 
     public bool _gravityFlipped;
     private bool _isGrounded;
@@ -34,7 +36,6 @@ public class PlayerController : MonoBehaviour
             body.localScale = new Vector3(1, multiplier, 1);
         }
     }
-
 
     void Start()
     {
@@ -66,6 +67,15 @@ public class PlayerController : MonoBehaviour
         }
 
         _animator.SetBool("Falling", !_isGrounded);
+
+        if(Input.GetButtonDown("Fire1") && gameManager.Shurikens > 0)
+        {
+            GameObject newShuriken = Instantiate(shuriken,
+                throwPosition.position, Quaternion.identity);
+            newShuriken.GetComponent<ShurikenController>().Initialise(
+                (int) transform.localScale.x);
+            gameManager.Shurikens--;
+        }
     }
 
     private void FixedUpdate()

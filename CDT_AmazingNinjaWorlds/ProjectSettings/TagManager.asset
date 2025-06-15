@@ -10,6 +10,8 @@ TagManager:
   - Goal
   - FlipGravity
   - RevertGravity
+  - Shuriken
+  - Platform
   layers:
   - Default
   - TransparentFX
