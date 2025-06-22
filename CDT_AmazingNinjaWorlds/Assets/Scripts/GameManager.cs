@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject deathParticles;
     public GameObject levelCompleteMenu;
     public RublesDisplay rubiesDisplay;
+    public GameObject[] shurikenCollectibles;
    
     private int _currentCheckpoint;
     private bool[] _collectiblesCollected;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
         _currentCheckpoint = 0;
         _collectiblesCollected = new bool[3];
 
-        Shurikens = 5;
+        Shurikens = 0;
 
         levelCompleteMenu.SetActive(false);
         rubiesDisplay.levelNumber = levelNumber;
@@ -91,6 +92,14 @@ GameObject particles = Instantiate(deathParticles, new
         {
             player.GravityFlipped = false;
         }
+
+        Shurikens = 0;
+
+        foreach(GameObject shurikenCollectible in shurikenCollectibles)
+        {
+            shurikenCollectible.SetActive(true);
+        }
+
         player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         player.Enable();
         player.gameObject.SetActive(true);
