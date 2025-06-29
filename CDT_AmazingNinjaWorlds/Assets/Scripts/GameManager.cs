@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public string menuSceneName;
     public string nextLevelName;
     public bool shurikensEnabled;
+    public string levelMusicName;
 
     public PlayerController player;
     public CameraFollow cam;
@@ -24,6 +25,10 @@ public class GameManager : MonoBehaviour
     private int _currentCheckpoint;
     private bool[] _collectiblesCollected;
     private int _shurikens;
+
+    private bool[] _collectablesCollected;
+
+    private AudioManager _audioManager;
 
     public int Shurikens
     {
@@ -43,6 +48,11 @@ public class GameManager : MonoBehaviour
 
         levelCompleteMenu.SetActive(false);
         rubiesDisplay.levelNumber = levelNumber;
+
+        _audioManager = FindObjectOfType<AudioManager>();
+
+        _audioManager.FindAudio(levelMusicName).loop = true;
+        _audioManager.PlayAudio(levelMusicName);
     }
 
     // Update is called once per frame
@@ -58,7 +68,9 @@ public class GameManager : MonoBehaviour
 
         player.gameObject.SetActive(false);
 
-GameObject particles = Instantiate(deathParticles, new
+        _audioManager.PlayAudio("PlayerDeath");
+
+        GameObject particles = Instantiate(deathParticles, new
         Vector3(player.transform.position.x, player.transform.position.y),
         Quaternion.identity);
         Destroy(particles, 1f);
@@ -73,6 +85,7 @@ GameObject particles = Instantiate(deathParticles, new
             if (checkpointNumber > _currentCheckpoint)
             {
                 _currentCheckpoint = checkpointNumber;
+                _audioManager.PlayAudio("ActivateCheckpoint");
             }
         }
     }
@@ -112,6 +125,8 @@ GameObject particles = Instantiate(deathParticles, new
         int collectibleNumber = Array.IndexOf(collectibles, collectible);
 
         _collectiblesCollected[collectibleNumber] = true;
+
+        _audioManager.PlayAudio("GemCollect");
     }
 
     public void ReachedGoal()
@@ -128,8 +143,9 @@ GameObject particles = Instantiate(deathParticles, new
                     (i + 1), 1);
             }
         }
-      
-       levelCompleteMenu.SetActive(true);
+      _audioManager.PlayAudio("LevelComplete");
+
+        levelCompleteMenu.SetActive(true);
        levelCompleteMenu.GetComponent<Animator>().SetTrigger("Activate");
        rubiesDisplay.UpdateRubies();
     }
@@ -137,11 +153,13 @@ GameObject particles = Instantiate(deathParticles, new
 
     public void LoadMenu()
     {
+        _audioManager.PlayAudio("ButtonClick");
         SceneManager.LoadScene(menuSceneName);
     }
 
     public void LoadNextLevel()
     {
+        _audioManager.PlayAudio("ButtonClick");
         SceneManager.LoadScene(nextLevelName);
     }
 }

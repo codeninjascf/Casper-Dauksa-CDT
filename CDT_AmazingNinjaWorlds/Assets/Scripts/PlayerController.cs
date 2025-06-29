@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool _enabled;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private AudioManager _audioManager;
 
 
     public bool GravityFlipped
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _audioManager = FindObjectOfType<AudioManager>();
 
         GravityFlipped = false;
         _enabled = true;
@@ -49,6 +52,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (!_enabled) return;
+
+        bool previouslyGrounded = _isGrounded;
         _isGrounded = !GravityFlipped ?
             Physics2D.Raycast(transform.position, Vector2.down,
             groundDistanceThreshold, whatIsGround)
@@ -56,10 +61,16 @@ public class PlayerController : MonoBehaviour
             groundDistanceThreshold + spriteHeight, whatIsGround);
 
 
+        if (!previouslyGrounded && _isGrounded)
+        {
+            _audioManager.PlayAudio("PlayerLand");
+        }
+
         if (_isGrounded && Input.GetButtonDown("Jump"))
         {
             _animator.SetBool("Jumping", true);
             _rigidbody.velocity = Vector2.up * jumpForce;
+            _audioManager.PlayAudio("PlayerJump");
         }
         else
         {
@@ -75,6 +86,7 @@ public class PlayerController : MonoBehaviour
             newShuriken.GetComponent<ShurikenController>().Initialise(
                 (int) transform.localScale.x);
             gameManager.Shurikens--;
+            _audioManager.PlayAudio("ShurikenThrow");
         }
     }
 
@@ -95,10 +107,19 @@ public class PlayerController : MonoBehaviour
         }
 
         _rigidbody.position += movement * Time.deltaTime * Vector2.right;
+
+        if (movement == 0 || !_isGrounded)
+        {
+            _audioManager.StopAudio("PlayerRun");
+        }
+        else
+        {
+            _audioManager.PlayAudio("PlayerRun");
+        }
     }
 
 
-    public void Enable()
+public void Enable()
     {
         _enabled = true;
     }
