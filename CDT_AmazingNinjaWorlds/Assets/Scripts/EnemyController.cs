@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float jumpForce = 7f;
-
+    public AudioSource jumpAudio;
     private Rigidbody2D _rigidbody;
 
     void Start()
@@ -23,5 +23,6 @@ public class EnemyController : MonoBehaviour
     {
         _rigidbody.velocity = Vector2.zero;
         _rigidbody.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+        jumpAudio.Play();
     }
 }

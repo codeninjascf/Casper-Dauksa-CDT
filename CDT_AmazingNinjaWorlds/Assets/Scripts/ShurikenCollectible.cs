@@ -24,8 +24,8 @@ public class NewBehaviourScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gameManager.Shurikens += collectibleValue;
+            FindObjectOfType<AudioManager>().PlayAudio("ShurikenCollect");
             gameObject.SetActive(false);
-            print("aaaaaaaaaaaaaaaaa");
         }
     }
 }

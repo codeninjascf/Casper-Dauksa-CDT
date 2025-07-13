@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
     public int levelNumber;
     public float respawnDelay = 1.5f;
     public string menuSceneName;
     public string nextLevelName;
     public bool shurikensEnabled;
     public string levelMusicName;
+    public float exitTime = 2f;
 
     public PlayerController player;
     public CameraFollow cam;
@@ -21,10 +23,12 @@ public class GameManager : MonoBehaviour
     public GameObject levelCompleteMenu;
     public RublesDisplay rubiesDisplay;
     public GameObject[] shurikenCollectibles;
+    public GameObject exitText;
    
     private int _currentCheckpoint;
     private bool[] _collectiblesCollected;
     private int _shurikens;
+    private float _escapeTime;
 
     private bool[] _collectablesCollected;
 
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
 
         levelCompleteMenu.SetActive(false);
         rubiesDisplay.levelNumber = levelNumber;
+        exitText.SetActive(false);
 
         _audioManager = FindObjectOfType<AudioManager>();
 
@@ -55,9 +60,25 @@ public class GameManager : MonoBehaviour
         _audioManager.PlayAudio(levelMusicName);
     }
 
-    // Update is called once per frame
+  // A
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            exitText.SetActive(true);
+            _escapeTime += Time.deltaTime;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            exitText.SetActive(false);
+            _escapeTime = 0;
+        }
+
+        if(_escapeTime >= exitTime)
+        {
+            LoadMenu();
+        }
 
     }
 

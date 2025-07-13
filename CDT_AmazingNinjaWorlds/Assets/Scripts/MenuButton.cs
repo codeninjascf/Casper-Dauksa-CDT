@@ -11,9 +11,9 @@ public class MenuButton : MonoBehaviour
     public string levelName;
     public Sprite unlockedSprite;
     public Sprite lockedSprite;
-
     private bool _locked;
     private Image _image;
+    private AudioManager _audioManager;
 
     void Start()
     {
@@ -30,6 +30,10 @@ public class MenuButton : MonoBehaviour
             _locked = true;
             _image.sprite = lockedSprite;
         }
+
+        _audioManager = FindObjectOfType<AudioManager>();
+        _audioManager.FindAudio("MenuMusic").loop = true;
+        _audioManager.PlayAudio("MenuMusic");
     }
 
     void Update()
@@ -39,8 +43,10 @@ public class MenuButton : MonoBehaviour
 
     public void OnClick()
     {
-    if (_locked) return;
+     if (_locked) return;
 
-    SceneManager.LoadScene(levelName);
+        _audioManager.PlayAudio("ButtonClick");
+
+        SceneManager.LoadScene(levelName);
     }
 }
