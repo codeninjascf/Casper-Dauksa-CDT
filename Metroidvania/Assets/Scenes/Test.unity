@@ -3015,6 +3015,7 @@ MonoBehaviour:
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  anim: {fileID: 0}
 --- !u!212 &1634625038
 SpriteRenderer:
   m_ObjectHideFlags: 0
