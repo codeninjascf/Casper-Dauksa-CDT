@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     public Rigidbody2D theRB;
     public float moveSpeed;
     public float jumpForce;
@@ -13,6 +14,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask WhatIsGround;
 
     public Animator anim;
+
+    public BulletController shotToFire;
+    public Transform shotPoint;
+
 
     // Start is called before the first frame update
 
@@ -47,12 +52,19 @@ public class PlayerController : MonoBehaviour
         }
 
         // jumping
-        if(Input.GetButtonDown("Jump") && isOnGround)
+        if (Input.GetButtonDown("Jump") && isOnGround)
         {
             theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
         }
 
         anim.SetBool("isOnGround", isOnGround);
         anim.SetFloat("speed", Mathf.Abs(theRB.velocity.x));
+
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(shotToFire, shotPoint.position, shotPoint.rotation);
+
+        }
     }
 }
