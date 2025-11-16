@@ -46,10 +46,6 @@ public class PlayerController : MonoBehaviour
         // Checking if on ground
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, .2f, WhatIsGround);
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-        }
 
         // jumping
         if (Input.GetButtonDown("Jump") && isOnGround)
@@ -63,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(shotToFire, shotPoint.position, shotPoint.rotation);
+            Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).moveDir = new Vector2(transform.localScale.x, 0f);
 
         }
     }
