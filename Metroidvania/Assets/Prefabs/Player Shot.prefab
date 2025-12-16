@@ -159,6 +159,7 @@ MonoBehaviour:
   bulletSpeed: 15
   theRB: {fileID: 6783505166697951887}
   moveDir: {x: 1, y: 0}
+  impactEffect: {fileID: 3957585387090504253, guid: a9621f79daa0b0842a6fa59e0df98252, type: 3}
 --- !u!50 &6783505166697951887
 Rigidbody2D:
   serializedVersion: 4

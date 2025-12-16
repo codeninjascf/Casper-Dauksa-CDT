@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -10,12 +9,13 @@ public class BulletController : MonoBehaviour
 
     public Vector2 moveDir;
 
+    public GameObject impactEffect;
+
 
     void Start()
     {
         
     }
-
 
     void Update()
     {
@@ -24,6 +24,11 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (impactEffect != null)
+        {
+            Instantiate(impactEffect, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 

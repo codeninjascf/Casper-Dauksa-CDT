@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -18,12 +17,14 @@ public class PlayerController : MonoBehaviour
     public BulletController shotToFire;
     public Transform shotPoint;
 
+    private bool canDoubleJump;
+
 
     // Start is called before the first frame update
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -48,19 +49,28 @@ public class PlayerController : MonoBehaviour
 
 
         // jumping
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        if (Input.GetButtonDown("Jump") && (isOnGround || canDoubleJump))
         {
+            if (isOnGround)
+            {
+                canDoubleJump = true;
+            }
+            else
+            {
+                canDoubleJump = false;
+            }
             theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
         }
 
         anim.SetBool("isOnGround", isOnGround);
         anim.SetFloat("speed", Mathf.Abs(theRB.velocity.x));
 
-
-        if (Input.GetButtonDown("Fire1"))
-        {
+           
+        //shooting
+         if (Input.GetButtonDown("Fire1"))
+         {
             Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).moveDir = new Vector2(transform.localScale.x, 0f);
-
-        }
+            anim.SetTrigger("shotFired");
+          }
     }
 }
